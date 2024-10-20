@@ -23,10 +23,13 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
+import Link from 'next/link'
+import WaitlistModal from './WaitlistModal' // Import the modal component
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
   const [scrollY, setScrollY] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false) // State to manage modal
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -35,7 +38,15 @@ export default function WithSubnavigation() {
   }, [])
 
   const navBarHeight = scrollY > 50 ? '50px' : '60px'
-  const navBarOpacity = scrollY > 50 ? 0.7 : 1
+  const navBarOpacity = scrollY > 50 ? 0.9 : 1
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+  }
 
   return (
     <Box
@@ -54,9 +65,6 @@ export default function WithSubnavigation() {
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.700', 'gray.900')}
         align={'center'}
       >
         <Flex
@@ -72,12 +80,17 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            color={useColorModeValue('white', 'white')}
-          >
-            ♻️ Bin Fiesta
-          </Text>
+          <Link href="/" passHref>
+            <Text
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              color={useColorModeValue('white', 'white')}
+              fontWeight="bold"
+              fontSize="xl"
+              cursor="pointer"
+            >
+              ♻️ Bin Fiesta
+            </Text>
+          </Link>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -90,29 +103,47 @@ export default function WithSubnavigation() {
           direction={'row'}
           spacing={6}
         >
-          {/* <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'/login'}>
-            Sign In
-          </Button> */}
-          {/* <Button
-            as={'a'}
+          {/* Waitlist Button */}
+          <Button
+            onClick={handleModalOpen} // Open the modal on click
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
             bg={'green.400'}
-            href={'/signup'}
             _hover={{
               bg: 'green.300',
             }}
           >
-            Sign Up
-          </Button> */}
+            Join Waitlist
+          </Button>
+
+          {/* Demo Button without nesting <a> */}
+          <Link href="/demo" passHref>
+  <Button
+    display={{ base: 'none', md: 'inline-flex' }}
+    fontSize={'sm'}
+    fontWeight={600}
+    bg={'white'}
+    color={'black'}
+    _hover={{
+      bg: 'gray.100',
+    }}
+  >
+    Demo
+  </Button>
+</Link>
+
+
         </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
+
+      {/* Waitlist Modal */}
+      <WaitlistModal isOpen={isModalOpen} onClose={handleModalClose} />
     </Box>
   )
 }
@@ -128,10 +159,9 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
+              <Link href={navItem.href ?? '#'}>
               <Box
-                as="a"
                 p={2}
-                href={navItem.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -142,6 +172,8 @@ const DesktopNav = () => {
               >
                 {navItem.label}
               </Box>
+            </Link>
+
             </PopoverTrigger>
 
             {navItem.children && (
@@ -266,5 +298,5 @@ const MobileNavItem = ({ label, children, href }) => {
 }
 
 const NAV_ITEMS = [
-  // Add your navigation items here
+  // Define your navigation items here
 ]
