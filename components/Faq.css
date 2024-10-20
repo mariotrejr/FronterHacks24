@@ -1,0 +1,61 @@
+/* FAQ Container */
+.faq-container {
+    font-family: 'Arial, sans-serif';
+    margin: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* FAQ Heading */
+.faq-container h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+/* FAQ Question */
+.faq-question {
+    cursor: pointer;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 26px; /* Adjusted for readability */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-wrap: break-word; /* Ensures long questions wrap correctly */
+    color: #68D391; /* green.400 color for text */
+    background-color: transparent; /* No background color */
+}
+
+/* Hover effect for FAQ Question */
+.faq-question:hover {
+    transform: scale(1.02);
+    background-color: rgba(104, 211, 145, 0.1); /* Light green hover effect using green.400 */
+}
+
+/* FAQ Answer */
+.faq-answer {
+    display: none;
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: max-height 0.3s ease;
+    font-size: 22px; /* Slightly smaller for better readability */
+    background-color: transparent; /* No background color */
+}
+
+.faq-answer.show {
+    display: block;
+}
+
+/* FAQ Arrow Icon */
+.faq-question .arrow {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active .arrow {
+    transform: rotate(180deg);
+}

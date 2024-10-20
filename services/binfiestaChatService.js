@@ -13,7 +13,7 @@ export async function startBinFiestaChat(message) {
 */
 
 // services/binfiestaChatService.js
-
+/*
 import axios from 'axios';
 
 // Replace this with your actual Gemini API endpoint URL
@@ -45,3 +45,32 @@ export async function startBinFiestaChat(message) {
         return "Sorry, I couldn't process your request at the moment.";
     }
 }
+*/
+
+// services/binfiestaChatService.js
+/*
+    
+    try {
+        const response = await axios.post(
+            GEMINI_API_URL,
+            {
+                model: "gemini-1.5-flash",
+                prompt: message,
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        
+        const { data } = response;
+        return data.response.text;
+    } catch (error) {
+        console.error("Error communicating with the Gemini API:", error);
+        return "Sorry, I couldn't process your request at the moment.";
+    }
+    */
+
+    
