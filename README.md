@@ -1,4 +1,4 @@
-♻️ Bin Fiesta
+# ♻️ Bin Fiesta
 Bin Fiesta is an innovative recycling app that helps users easily determine whether an item can be recycled. By simply uploading an image of the item, Bin Fiesta analyzes the image and provides recycling guidelines and tips, all while offering localized recycling information based on the user’s location.
 
 This project is built using Next.js and bootstrapped with create-next-app.
