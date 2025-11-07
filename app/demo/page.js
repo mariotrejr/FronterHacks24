@@ -23,6 +23,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Chat from '@/app/Chat'; // Import the Chat component
 
 // Dynamically import the WaitlistModal and Centers Page
 const WaitlistModal = dynamic(() => import('../../components/WaitlistModal'), { ssr: false });
@@ -319,9 +320,23 @@ const AnalyzePage = () => {
         </TabPanels>
       </Tabs>
 
+      <Box mt={12}> {/* Added margin-top for spacing */}
+            <Chat /> {/* Add the Chat component */}
+          </Box>
+
+
       {/* Waitlist Modal */}
       {isClient && <WaitlistModal isOpen={isModalOpen} onClose={handleModalClose} />}
     </Box>
+
+
+
+
+
+
+
+
+
   );
 };
 

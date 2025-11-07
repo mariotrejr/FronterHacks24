@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+  position: fixed; /* Fixed position for the pop-up effect */
+  bottom: 10px; /* Aligns the div to the bottom */
+  right: -300px; /* Initially hidden to the right */
+  width: 300px; /* Fixed width for the popup */
+  background-color: #ffffff; /* White background for contrast */
+  padding: 20px; /* Padding for space inside */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  transition: right 0.5s ease-in-out; /* Smooth sliding effect */
+}
+
+.App:hover {
+  right: 10px; /* Slide into view on hover */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #2ea93e; /* Light green background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white; /* White font color */
+}
+
+.App-link {
+  color: #2ea93e; /* Green color for the links to match the theme */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.App-link:hover {
+  color: #1a6627; /* Darker green on hover */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

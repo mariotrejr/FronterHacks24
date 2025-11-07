@@ -1,0 +1,78 @@
+
+/* FAQ Container */
+.faq-container {
+  background-color: linear-gradient(to right, black, blue.400); /* Background gradient */
+  color: white; /* Text color */
+  padding: 60px; /* Add padding */
+}
+
+/* Inner Wrapper */
+.faq-inner {
+  max-width: 600px; /* Max width for content */
+  width: 100%; /* Full width */
+  margin: auto; /* Center it */
+}
+
+/* FAQ Heading */
+.faq-container h1 {
+  font-family: 'Arial, sans-serif';
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 100px;
+}
+  
+  /* FAQ Question */
+  .faq-question {
+    font-family: 'Arial, sans-serif';
+    cursor: pointer;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 26px;
+    display: flex;
+    justify-content: space-between; /* Space between question and arrow */
+    align-items: left; /* Center items vertically within the question */
+    word-wrap: break-word;
+    color: #68D391; /* Green color for text */
+    width: 100%; /* Full width */
+    max-width: 600px; /* Max width for better readability */
+    text-align: left; /* Left align the text */
+  }
+  
+  /* Hover effect for FAQ Question */
+  .faq-question:hover {
+    transform: scale(1.02);
+    background-color: rgba(104, 211, 145, 0.2); /* Light green hover effect using green.400 */
+  }
+  
+  /* FAQ Answer */
+  .faq-answer {
+    font-family: 'Arial, sans-serif';
+    display: none; /* Hidden by default */
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: max-height 0.3s ease;
+    font-size: 22px;
+    color: white; /* White text for better contrast */
+    border-radius: 8px; /* Round corners */
+    width: 100%; /* Full width */
+    max-width: 600px; /* Max width for better readability */
+    text-align: left; /* Left align the answers */
+  }
+  
+  .faq-answer.show {
+    display: block; /* Show answer when active */
+  }
+  
+  /* FAQ Arrow Icon */
+  .faq-question .arrow {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+    color: white; /* White arrow icon to match the background */
+  }
+  
+  .faq-question.active .arrow {
+    transform: rotate(180deg); /* Rotate arrow when active */
+  }
+  

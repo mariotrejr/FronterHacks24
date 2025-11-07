@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -9,44 +9,42 @@ import {
   Button,
   Stack,
   Collapse,
-  Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-} from '@chakra-ui/react'
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons'
-import Link from 'next/link'
-import WaitlistModal from './WaitlistModal' // Import the modal component
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import Link from 'next/link';
+import WaitlistModal from './WaitlistModal'; // Import the modal component
 
 export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure()
-  const [scrollY, setScrollY] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false) // State to manage modal
+  const { isOpen, onToggle } = useDisclosure();
+  const [scrollY, setScrollY] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const navBarHeight = scrollY > 50 ? '50px' : '60px'
-  const navBarOpacity = scrollY > 50 ? 0.9 : 1
+  const navBarHeight = scrollY > 50 ? '50px' : '60px';
+  const navBarOpacity = scrollY > 50 ? 0.9 : 1;
+
+  // Move useColorModeValue outside of the JSX
+  const bgColor = useColorModeValue('black', 'black');
+  const textColor = useColorModeValue('white', 'white');
+  const linkColor = useColorModeValue('white', 'white');
+  const linkHoverColor = useColorModeValue('green.400', 'green.400');
+  const textAlignValue = useBreakpointValue({ base: 'center', md: 'left' });
 
   const handleModalOpen = () => {
-    setIsModalOpen(true)
-  }
+    setIsModalOpen(true);
+  };
 
   const handleModalClose = () => {
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
   return (
     <Box
@@ -60,8 +58,8 @@ export default function WithSubnavigation() {
       zIndex={1000}
     >
       <Flex
-        bg={useColorModeValue('black', 'black')}
-        color={useColorModeValue('white', 'white')}
+        bg={bgColor}
+        color={textColor}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
@@ -82,8 +80,8 @@ export default function WithSubnavigation() {
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Link href="/" passHref>
             <Text
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-              color={useColorModeValue('white', 'white')}
+              textAlign={textAlignValue}
+              color={textColor}
               fontWeight="bold"
               fontSize="xl"
               cursor="pointer"
@@ -93,16 +91,11 @@ export default function WithSubnavigation() {
           </Link>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-            <DesktopNav />
+            <DesktopNav linkColor={linkColor} linkHoverColor={linkHoverColor} />
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-        >
+        <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
           {/* Waitlist Button */}
           <Button
             onClick={handleModalOpen} // Open the modal on click
@@ -111,192 +104,129 @@ export default function WithSubnavigation() {
             fontWeight={600}
             color={'white'}
             bg={'green.400'}
-            _hover={{
-              bg: 'green.300',
-            }}
+            _hover={{ bg: 'green.300' }}
           >
             Join Waitlist
           </Button>
 
-          {/* Demo Button without nesting <a> */}
+          {/* Demo Button */}
           <Link href="/demo" passHref>
-  <Button
-    display={{ base: 'none', md: 'inline-flex' }}
-    fontSize={'sm'}
-    fontWeight={600}
-    bg={'white'}
-    color={'black'}
-    _hover={{
-      bg: 'gray.100',
-    }}
-  >
-    Demo
-  </Button>
-</Link>
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              bg={'white'}
+              color={'black'}
+              _hover={{ bg: 'gray.100' }}
+            >
+              Demo
+            </Button>
+          </Link>
+
+      {/* Mission */}
+    <Link href="/Mission" passHref>
+        <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'black'}
+            bg={'white'}
+            _hover={{ bg: 'gray.800' }}>
+            Our Mission
+        </Button>
+    </Link>
+
+
+
+
+          {/* About Us */}
+    <Link href="/About" passHref>
+        <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'black'}
+            bg={'white'}
+            _hover={{ bg: 'gray.100' }}>
+            About Us
+        </Button>
+    </Link>
+
+            {/* FAQ Button */}
+    <Link href="/faq" passHref>
+        <Button
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'black'}
+            bg={'white'}
+            _hover={{ bg: 'gray.800' }}>
+            FAQ
+        </Button>
+    </Link>
+
 
 
         </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav linkColor={linkColor} textColor={textColor} />
       </Collapse>
 
       {/* Waitlist Modal */}
       <WaitlistModal isOpen={isModalOpen} onClose={handleModalClose} />
     </Box>
-  )
+  );
 }
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('white', 'white')
-  const linkHoverColor = useColorModeValue('green.400', 'green.400')
-  const popoverContentBgColor = useColorModeValue('black', 'black')
-
+const DesktopNav = ({ linkColor, linkHoverColor }) => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link href={navItem.href ?? '#'}>
-              <Box
-                p={2}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Box>
-            </Link>
-
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
+          <Link href={navItem.href ?? '#'}>
+            <Box
+              p={2}
+              fontSize={'sm'}
+              fontWeight={500}
+              color={linkColor}
+              _hover={{
+                textDecoration: 'none',
+                color: linkHoverColor,
+              }}
+            >
+              {navItem.label}
+            </Box>
+          </Link>
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
-const DesktopSubNav = ({ label, href, subLabel }) => {
+const MobileNav = ({ linkColor, textColor }) => {
   return (
-    <Box
-      as="a"
-      href={href}
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('gray.700', 'gray.900') }}
-    >
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'green.400' }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}
-        >
-          <Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Box>
-  )
-}
-
-const MobileNav = () => {
-  return (
-    <Stack bg={useColorModeValue('black', 'black')} p={4} display={{ md: 'none' }}>
+    <Stack bg={linkColor} p={4} display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+        <Stack spacing={4} key={navItem.label}>
+          <Link href={navItem.href ?? '#'}>
+            <Box py={2} justifyContent="space-between" alignItems="center" _hover={{ textDecoration: 'none' }}>
+              <Text fontWeight={600} color={textColor}>
+                {navItem.label}
+              </Text>
+            </Box>
+          </Link>
+        </Stack>
       ))}
     </Stack>
-  )
-}
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Box
-        py={2}
-        as="a"
-        href={href ?? '#'}
-        justifyContent="space-between"
-        alignItems="center"
-        _hover={{
-          textDecoration: 'none',
-        }}
-      >
-        <Text fontWeight={600} color={useColorModeValue('white', 'white')}>
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Box>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.700', 'gray.700')}
-          align={'start'}
-        >
-          {children &&
-            children.map((child) => (
-              <Box as="a" key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Box>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
-  )
-}
+  );
+};
 
 const NAV_ITEMS = [
-  // Define your navigation items here
-]
+  //{
+   // label: 'FAQ',
+    //href: '/faq',
+  //},
+  // You can add more navigation items here
+];
